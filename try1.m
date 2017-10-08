@@ -1,5 +1,7 @@
 %%
-%some new stuff for commit.
+%some new stuff for commit
+
+%more changes to the disparity map, getting the mesh to work
 close all
 
 video_file = 'D:\4kvideo\videos\fv.mp4';
