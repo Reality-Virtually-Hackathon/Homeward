@@ -1,7 +1,5 @@
-%%
-%some new stuff for commit
+%% 
 
-%more changes to the disparity map, getting the mesh to work
 close all
 
 video_file = 'D:\4kvideo\videos\fv.mp4';
@@ -17,7 +15,7 @@ video = video(:,382:546,:);
 
 im1 = video(1:h/2,1:end,1:3);
 im2 = video(h/2 + 1: end,1:end,1:3);
-%
+% 
 % ha = [];
 % figure;
 % ha(end+1) = subplot(1,2,1);
@@ -59,12 +57,12 @@ d_list = [-20 : 20];
 d = zeros(size(im1,1),size(im1,2));
 
 for ii = 1:length(d_list)
-
+    
     diff = double(im1) - double(circshift(im2,[0,d_list(ii)]));
-
-
+    
+    
     ha = [];
-    figure(8);
+    figure(8); 
     ha(end+1) = subplot(1,3,1);
     imagesc(im1);
     ha(end+1) = subplot(1,3,2);
@@ -75,7 +73,7 @@ for ii = 1:length(d_list)
     title(d_list(ii))
     linkaxes(ha,['x','y']);
     pause(.1)
-
+    
     diff = sum(abs(diff),3);
     d(find(diff<10))=d_list(ii);
 end
@@ -95,8 +93,8 @@ disparityRange = [-6 10];
 disparityMap = disparity(rgb2gray(I1),rgb2gray(I2),'BlockSize',...
     15,'DisparityRange',disparityRange);
 
-figure
+figure 
 imshow(disparityMap,disparityRange);
 title('Disparity Map');
-colormap(gca,jet)
+colormap(gca,jet) 
 colorbar

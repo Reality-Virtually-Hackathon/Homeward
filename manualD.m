@@ -86,9 +86,9 @@ function [triList] = manualD(v)
             
             
             triList{end+1} = [bl,br,tl];
-            triList{end+1} = [tl,br,bl];
+            %triList{end+1} = [tl,br,bl];
             triList{end+1} = [tr,br,tl];
-            triList{end+1} = [tl,br,tr];           
+            %triList{end+1} = [tl,br,tr];           
             
         end
     end

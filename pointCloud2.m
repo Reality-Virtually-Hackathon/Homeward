@@ -40,9 +40,26 @@ phi = X*360*pi/180;
 phi = phi(:);
 
 %disp(disp<0)=max(disp(:));
-R = 60 + 1*(max(disp(:))-disp);
+mindist = 20;
+dynamicrange = 200;
+superfar = 400;
+disp = disp/(max(disp(:))-min(disp(:)));
+R = mindist + dynamicrange*(1-disp);
+R(disp==0)=superfar;
+R(1:floor(size(R,1)*.2),:)=superfar;
+
+
+R = R.^2;
+R = R/max(R(:));
+
+
+fudge_height = max(max(R(disp~=0)));
+fudge_height = fudge_height*.9;
+
 %R= atan(R);
 R = R(:);
+
+
 
 r = double(imresize(im(:,:,1),factor));
 r = r(:)/256;
@@ -55,7 +72,7 @@ b = b(:)/256;
 
 x = R.*cos(phi);
 y = R.*sin(phi);
-z = -50*Y(:);
+z = -fudge_height*Y(:);
 
 % x = R.*sin(theta).*cos(phi);
 % y = R.*sin(theta).*sin(phi);
@@ -78,6 +95,7 @@ dix = fix(length(pix)+1:end);
 hold on;
 scatter3(x(dix),y(dix),z(dix),1,[r(dix),g(dix),b(dix)]);
 
+axis equal;
 
 
 
